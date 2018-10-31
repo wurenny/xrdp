@@ -1943,6 +1943,7 @@ clipboard_event_selection_notify(XEvent *xevent)
                         }
                         else if ((atom == g_file_atom1) || (atom == g_file_atom2))
                         {
+							return rv;
                             log_debug("clipboard_event_selection_notify: file");
                             got_file_atom = atom;
                         }
@@ -2036,6 +2037,7 @@ clipboard_event_selection_notify(XEvent *xevent)
             }
             else if (lxevent->target == g_file_atom2)
             {
+				return rv;
                 log_debug("clipboard_event_selection_notify: text/uri-list "
                       "data_size %d", data_size);
                 log_debug("clipboard_event_selection_notify: text/uri-list "

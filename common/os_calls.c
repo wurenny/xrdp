@@ -3823,7 +3823,7 @@ g_mirror_memcpy(void *dst, const void *src, int len)
     return 0;
 }
 
-char *
+const char *
 g_get_file_atom2_name()
 {
 	char *fmg = g_getenv("FILE_MANAGER");

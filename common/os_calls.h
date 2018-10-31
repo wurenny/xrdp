@@ -184,7 +184,7 @@ int      g_shmdt(const void *shmaddr);
 int      g_gethostname(char *name, int len);
 int      g_mirror_memcpy(void *dst, const void *src, int len);
 
-char*    g_get_file_atom2_name();
+const char*    g_get_file_atom2_name();
 
 /* glib-style wrappers */
 #define g_new(struct_type, n_structs) \
