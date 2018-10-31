@@ -248,7 +248,7 @@ static Atom g_get_time_atom = 0;       /* XRDP_GET_TIME_ATOM */
 static Atom g_utf8_atom = 0;           /* UTF8_STRING */
 static Atom g_image_bmp_atom = 0;      /* image/bmp */
 static Atom g_file_atom1 = 0;          /* text/uri-list */
-static Atom g_file_atom2 = 0;          /* x-special/gnome-copied-files */
+static Atom g_file_atom2 = 0;          /* x-special/xxx-copied-files */
 static Atom g_incr_atom = 0;           /* INCR */
 
 static Window g_wnd = 0;
@@ -422,7 +422,7 @@ clipboard_init(void)
 
         g_image_bmp_atom = XInternAtom(g_display, "image/bmp", False);
         g_file_atom1 = XInternAtom(g_display, "text/uri-list", False);
-        g_file_atom2 = XInternAtom(g_display, "x-special/gnome-copied-files", False);
+        g_file_atom2 = XInternAtom(g_display, g_get_file_atom2_name(), False);
         g_incr_atom = XInternAtom(g_display, "INCR", False);
 
         if (g_image_bmp_atom == None)
