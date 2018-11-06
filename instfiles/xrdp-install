@@ -1,0 +1,17 @@
+#!/bin/bash
+XRDP_HOME="$(cd "$(dirname "$0")/..";pwd)"
+
+echo "start install xrdp..."
+
+#for xrdp config
+cp -rf "${XRDP_HOME}/etc/xrdp" /etc/
+
+#for X11
+cp -f "${XRDP_HOME}/etc/xorg.conf" /etc/X11/xrdp/
+
+#for systemd
+cp -rf "${XRDP_HOME}/etc/system" /usr/lib/systemd/
+systemctl daemon-reload
+systemctl enable xrdp.service
+
+echo "finish install."

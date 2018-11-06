@@ -44,12 +44,6 @@ KillDisconnected=false
 ; min 60 seconds
 DisconnectedTimeLimit=0
 
-;; IdleTimeLimit (specify in second) - wait before disconnect idle sessions
-; Type: integer
-; Default: 0
-; Set to 0 to disable idle disconnection.
-IdleTimeLimit=0
-
 ;; Policy - session allocation policy
 ; Type: enum [ "Default" | "UBD" | "UBI" | "UBC" | "UBDI" | "UBDC" ]
 ; Default: Xrdp:<User,BitPerPixel> and Xvnc:<User,BitPerPixel,DisplaySize>
@@ -90,6 +84,13 @@ param=tcp
 param=-logfile
 param=.xorgxrdp.%s.log
 
+[X11rdp]
+param=X11rdp
+param=-bs
+param=-nolisten
+param=tcp
+param=-uds
+
 [Xvnc]
 param=Xvnc
 param=-bs
@@ -105,3 +106,4 @@ FuseMountName=thinclient_drives
 
 [SessionVariables]
 PULSE_SCRIPT=@sesmansysconfdir@/pulse/default.pa
+FILE_MANAGER=Caja

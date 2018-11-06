@@ -182,7 +182,7 @@ x-special/gnome-copied-files
 #define LOG_DEBUG   2
 
 #undef LOG_LEVEL
-#define LOG_LEVEL   LOG_ERROR
+#define LOG_LEVEL   LOG_DEBUG
 
 #define log_error(_params...)                           \
 {                                                       \
@@ -234,6 +234,8 @@ extern int g_x_socket;          /* in xcommon.c */
 extern tbus g_x_wait_obj;       /* in xcommon.c */
 extern Screen *g_screen;        /* in xcommon.c */
 extern int g_screen_num;        /* in xcommon.c */
+
+extern int g_fuse_allow_2c;
 
 int g_clip_up = 0;
 
@@ -422,8 +424,15 @@ clipboard_init(void)
 
         g_image_bmp_atom = XInternAtom(g_display, "image/bmp", False);
         g_file_atom1 = XInternAtom(g_display, "text/uri-list", False);
-        g_file_atom2 = XInternAtom(g_display, g_get_file_atom2_name(), False);
+		g_file_atom2 = XInternAtom(g_display, g_get_file_atom2_name(), False);
         g_incr_atom = XInternAtom(g_display, "INCR", False);
+
+        if (g_file_atom2 == None)
+        {
+            log_error("clipboard_init: g_file_atom2 was "
+                  "not allocated");
+        }
+        log_debug("clipboard_init: g_file_atom2 %ld %s", g_file_atom2, XGetAtomName(g_display, g_file_atom2));
 
         if (g_image_bmp_atom == None)
         {
@@ -1943,7 +1952,9 @@ clipboard_event_selection_notify(XEvent *xevent)
                         }
                         else if ((atom == g_file_atom1) || (atom == g_file_atom2))
                         {
-							return rv;
+							if (!g_fuse_allow_2c) {
+								break;
+							}
                             log_debug("clipboard_event_selection_notify: file");
                             got_file_atom = atom;
                         }
@@ -2020,6 +2031,10 @@ clipboard_event_selection_notify(XEvent *xevent)
             }
             else if (lxevent->target == g_file_atom1)
             {
+				if (!g_fuse_allow_2c) {
+					g_free(data);
+					return rv;
+				}
                 log_debug("clipboard_event_selection_notify: text/uri-list "
                       "data_size %d", data_size);
                 log_debug("clipboard_event_selection_notify: text/uri-list "
@@ -2037,7 +2052,10 @@ clipboard_event_selection_notify(XEvent *xevent)
             }
             else if (lxevent->target == g_file_atom2)
             {
-				return rv;
+				if (!g_fuse_allow_2c) {
+					g_free(data);
+					return rv;
+				}
                 log_debug("clipboard_event_selection_notify: text/uri-list "
                       "data_size %d", data_size);
                 log_debug("clipboard_event_selection_notify: text/uri-list "
