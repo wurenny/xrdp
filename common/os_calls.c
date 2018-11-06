@@ -3823,3 +3823,16 @@ g_mirror_memcpy(void *dst, const void *src, int len)
     return 0;
 }
 
+char *
+g_get_file_atom2_name()
+{
+	char *fmg = g_getenv("FILE_MANAGER");
+	if (g_strcmp(fmg, "Caja") == 0)
+	{
+		return "x-special/mate-copied-files";
+	}
+	else
+	{
+		return "x-special/gnome-copied-files";
+	}
+}

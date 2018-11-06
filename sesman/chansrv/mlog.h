@@ -33,7 +33,8 @@
 #define LOG_INFO        1
 #define LOG_DEBUG_LOW   2
 #define LOG_DEBUG_HIGH  3
-#define LOG_LEVEL       LOG_ERROR
+#define LOG_LEVEL       LOG_DEBUG_HIGH
+#define LOCAL_DEBUG
 
 /*
  * print always

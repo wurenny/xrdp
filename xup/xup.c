@@ -338,7 +338,7 @@ lib_mod_event(struct mod *mod, int msg, tbus param1, tbus param2,
     int key;
     int rv;
 
-    LIB_DEBUG(mod, "in lib_mod_event");
+    /*LIB_DEBUG(mod, "in lib_mod_event");*/
     make_stream(s);
 
     if ((msg >= 15) && (msg <= 16)) /* key events */
@@ -394,7 +394,7 @@ lib_mod_event(struct mod *mod, int msg, tbus param1, tbus param2,
     out_uint32_le(s, len);
     rv = lib_send_copy(mod, s);
     free_stream(s);
-    LIB_DEBUG(mod, "out lib_mod_event");
+    /*LIB_DEBUG(mod, "out lib_mod_event");*/
     return rv;
 }
 

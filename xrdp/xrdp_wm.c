@@ -1640,7 +1640,7 @@ static int
 xrdp_wm_process_input_mouse(struct xrdp_wm *self, int device_flags,
                             int x, int y)
 {
-    DEBUG(("mouse event flags %4.4x x %d y %d", device_flags, x, y));
+    /*DEBUG(("mouse event flags %4.4x x %d y %d", device_flags, x, y));*/
 
     if (device_flags & PTRFLAGS_MOVE)
     {

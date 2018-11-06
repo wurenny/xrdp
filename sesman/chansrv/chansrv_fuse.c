@@ -128,7 +128,7 @@ void xfuse_devredir_cb_file_close(void *vp)                                  {}
 #define LOG_ERROR   0
 #define LOG_INFO    1
 #define LOG_DEBUG   2
-#define LOG_LEVEL   LOG_ERROR
+#define LOG_LEVEL   LOG_DEBUG
 
 #define log_error(_params...)                           \
 {                                                       \
@@ -244,6 +244,7 @@ struct opendir_req
 };
 
 static char g_fuse_mount_name[256] = "xrdp_client";
+int g_fuse_allow_2c = 0;
 
 FIFO g_fifo_opendir;
 
@@ -388,6 +389,10 @@ load_fuse_config(void)
         if (g_strcasecmp(item, "FuseMountName") == 0)
         {
             g_strncpy(g_fuse_mount_name, value, 255);
+        }
+        if (g_strcasecmp(item, "FuseAllow2c") == 0)
+        {
+			g_fuse_allow_2c = g_text2bool(value);
         }
     }
     list_delete(items);

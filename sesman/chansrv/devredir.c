@@ -61,7 +61,7 @@
 #define LOG_DEBUG   2
 
 #ifndef LOG_LEVEL
-#define LOG_LEVEL   LOG_ERROR
+#define LOG_LEVEL   LOG_DEBUG
 #endif
 
 #define log_error(_params...)                           \
